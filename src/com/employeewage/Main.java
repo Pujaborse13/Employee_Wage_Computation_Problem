@@ -3,6 +3,7 @@ package com.employeewage;
 import java.util.Random;
 
 public class Main {
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to Employee wage Computation Program");
@@ -10,36 +11,28 @@ public class Main {
         final int WAGE_PER_HOUR = 20;
         final int FULL_DAY_HOURS = 8;
         final int PART_TIME_HOURS = 4;
+        final int WORKING_DAYS_PER_MONTH = 20;
 
-        final int   IS_ABSENT=0;
-        final int  IS_FULL_TIME=1;
-        final int   IS_PART_TIME=2;
+        int totalWage = 0;
 
-
-        Random random = new Random();
-        int employeeType = random.nextInt(3);
-
-        int dailyWage =0;
-
-        switch(employeeType) {
-            case IS_FULL_TIME:
-                dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
-                System.out.println("Employee is Full-Time");
-                break;
-            case IS_PART_TIME:
-                dailyWage = WAGE_PER_HOUR * PART_TIME_HOURS;
-                System.out.println("Employee is Part-Time");
-                break;
-
-            case IS_ABSENT:
-                System.out.println("Employee is Absent");
-                break;
-
-            default:
-                System.out.println("Invalid Employee Type");
+        for (int day = 1; day <= WORKING_DAYS_PER_MONTH; day++) {
+            int dailyHours = getWorkingHours();
+            int dailyWage = dailyHours * WAGE_PER_HOUR;
+            totalWage += dailyWage;
+            System.out.println("Day " + day + ": Worked " + dailyHours + " hours, Earned: $" + dailyWage);
         }
-        System.out.println("Daily Wage: $" + dailyWage);
+
+        System.out.println("Total Wage for the Month: $" + totalWage);
+    }
+    public static int getWorkingHours() {
+        int empCheck = (int) (Math.random() * 3);
+        switch (empCheck) {
+            case 1: return 8;
+            case 2: return 4;
+            default: return 0;
+              }
+
+        }
 
 
     }
-}
