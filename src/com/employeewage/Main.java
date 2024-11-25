@@ -21,8 +21,7 @@ public class Main {
 
         int dailyWage =0;
 
-        switch(employeeType)
-        {
+        switch(employeeType) {
             case IS_FULL_TIME:
                 dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
                 System.out.println("Employee is Full-Time");
@@ -38,8 +37,6 @@ public class Main {
 
             default:
                 System.out.println("Invalid Employee Type");
-
-
         }
         System.out.println("Daily Wage: $" + dailyWage);
 
