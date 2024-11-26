@@ -1,41 +1,36 @@
 package com.employeewage;
 import java.util.Random;
 
-public class EmployeeWage
-{
+public class EmployeeWage {
 
-        private static final int WAGE_PER_HOUR = 20;
-        private static final int FULL_DAY_HOURS = 8;
-        private static  final int PART_TIME_HOURS = 4;
-        private static  final int WORKING_DAYS_LIMIT = 20;
-        private static  final int WORKING_HOURS_LIMIT = 100;
+    public static void computeEmployeeWage(String companyName, int wagePerHour, int maxWorkingDays, int maxWorkingHours) {
+        int totalWage = 0;
+        int totalHoursWorked = 0;
+        int totalWorkingDays = 0;
 
-        public static void computeEmployeeWage() {
-            int totalWage = 0;
-            int totalHoursWorked = 0;
-            int totalWorkingDays = 0;
+        System.out.println("\nComputing wages for " + companyName);
 
-        while(totalWorkingDays < WORKING_DAYS_LIMIT && totalHoursWorked < WORKING_HOURS_LIMIT)
-        {
+        while (totalWorkingDays < maxWorkingDays && totalHoursWorked < maxWorkingHours) {
             totalWorkingDays++;
 
             int dailyHours = getWorkingHours();
             totalHoursWorked += dailyHours;
 
 
-            if (totalHoursWorked > WORKING_HOURS_LIMIT) {
-                totalHoursWorked -= dailyHours;
+            if (totalHoursWorked > maxWorkingHours) {
+                totalHoursWorked -= dailyHours; // Remove excess hours
                 break;
             }
 
-            int dailyWage = dailyHours * WAGE_PER_HOUR;
+            int dailyWage = dailyHours * wagePerHour;
             totalWage += dailyWage;
-            System.out.println("Day " + totalWorkingDays + ": Worked " + dailyHours + " hours, Earned: " + dailyWage);
-    }
 
-        System.out.println("\nTotal Working Days: " + totalWorkingDays);
-        System.out.println("Total Hours Worked: " + totalHoursWorked);
-        System.out.println("Total Wage for the Month: " + totalWage);
+            System.out.println("Day " + totalWorkingDays + ": Worked " + dailyHours + " hours, Earned: $" + dailyWage);
+        }
+
+        System.out.println("\n" + companyName + " - Total Working Days: " + totalWorkingDays);
+        System.out.println(companyName + " - Total Hours Worked: " + totalHoursWorked);
+        System.out.println(companyName + " - Total Wage for the Month: $" + totalWage);
     }
 
     public static int getWorkingHours() {
@@ -47,15 +42,17 @@ public class EmployeeWage
                 return 4;
             default:
                 return 0;
-
-            }
         }
+    }
 
-            public static void main(String[] args) {
+    public static void main(String[] args) {
 
-                System.out.println("Welcome to Employee wage Computation Program");
-                computeEmployeeWage();
+        System.out.println("Welcome to Employee Wage Computation Program - UC8");
 
-        }
+
+        computeEmployeeWage("Company A", 20, 20, 100);
+        computeEmployeeWage("Company B", 25, 22, 120);
+        computeEmployeeWage("Company C", 18, 25, 110);
 
     }
+}
